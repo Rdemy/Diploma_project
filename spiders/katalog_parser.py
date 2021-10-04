@@ -1,5 +1,4 @@
 import scrapy
-from dnsparser.items import DnsparserItem
 
 
 class EKatalogPartsSpider(scrapy.Spider):
@@ -7,8 +6,11 @@ class EKatalogPartsSpider(scrapy.Spider):
     start_urls = ['https://www.kns.ru/catalog/komplektuyuschie/']
 
     def parse(self, response):
-        item = DnsparserItem()
-        item['product_name'] = response.xpath('//a[@class="name d-block"]//span/text()').get()
-        item['product_price'] = response.xpath('//span[@class="price my-1"]/text()').get()
-        item['product_price'] = [price.replace('\xa0', '') for price in item['product_price']]
-        yield item
+        details = response.xpath('//*[@class = "goods-list-item mx-auto"]')
+        for category in details:
+            yield {
+                    'name': category.xpath('./*[@class="position-relative my-1 name-cont pr-xl-0"]//span/text()').get(),
+                    'price': category.xpath('./*[@class="block-price"]//span/text()').get().replace('\xa0',''),
+                    'description': category.xpath('./*[@class = "position-relative my-1 name-cont pr-xl-0"]//div/div/text()').get(),
+                    'rating': category.xpath('//div[@class="col-12 col-sm-6 text-md-right block-info"]//div//meta[1]/@content').get()
+            }
