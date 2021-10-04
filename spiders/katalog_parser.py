@@ -12,5 +12,6 @@ class EKatalogPartsSpider(scrapy.Spider):
                     'name': category.xpath('./*[@class="position-relative my-1 name-cont pr-xl-0"]//span/text()').get(),
                     'price': category.xpath('./*[@class="block-price"]//span/text()').get().replace('\xa0',''),
                     'description': category.xpath('./*[@class = "position-relative my-1 name-cont pr-xl-0"]//div/div/text()').get(),
-                    'rating': category.xpath('//div[@class="col-12 col-sm-6 text-md-right block-info"]//div//meta[1]/@content').get()
+                    'rating': category.xpath('.//div[@class="col-12 col-sm-6 text-md-right block-info"]//div//meta[1]/@content').get(),
+                    'commentary': category.xpath('.//div[@class="col-12 col-sm-6 text-md-right block-info"]//div//meta[2]/@content').get()
             }
