@@ -18,10 +18,10 @@ FEED_FORMAT = "scv"
 FEED_URL = "parts.csv"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'dnsparser (+http://www.yourdomain.com)'
+#USER_AGENT = 'dnsparser (https://www.kns.ru/)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+#ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
